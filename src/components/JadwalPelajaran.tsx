@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   TeachingSchedule,
   Teacher,
@@ -107,6 +107,13 @@ export const JadwalPelajaran: React.FC<JadwalPelajaranProps> = ({
   const [selectedClass, setSelectedClass] = useState<string>(classList[0] || 'VII A');
   const [selectedDayFilter, setSelectedDayFilter] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  // Synchronize selectedTeacherId whenever activeTeacher changes from Header or parent
+  useEffect(() => {
+    if (activeTeacher?.id) {
+      setSelectedTeacherId(activeTeacher.id);
+    }
+  }, [activeTeacher?.id]);
 
   // Super Admin Security & Protection State
   const [isAdminUnlocked, setIsAdminUnlocked] = useState<boolean>(() => {
@@ -1124,7 +1131,14 @@ export const JadwalPelajaran: React.FC<JadwalPelajaranProps> = ({
               <span className="font-bold text-slate-500 uppercase tracking-wider text-[10px]">Pilih Guru:</span>
               <select
                 value={selectedTeacherId}
-                onChange={e => setSelectedTeacherId(e.target.value)}
+                onChange={e => {
+                  const newId = e.target.value;
+                  setSelectedTeacherId(newId);
+                  const chosen = teachers.find(t => t.id === newId);
+                  if (chosen && onSelectTeacher) {
+                    onSelectTeacher(chosen);
+                  }
+                }}
                 className="border border-indigo-300 rounded-xl px-3 py-1.5 bg-indigo-50/50 font-extrabold text-indigo-950 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none cursor-pointer"
               >
                 {teachers.map(t => (

@@ -118,11 +118,19 @@ export const JurnalMengajar: React.FC<JurnalMengajarProps> = ({
 
   // Filtered Sessions
   const filteredSessions = sessions.filter(session => {
+    if (!session) return false;
+    const q = (searchQuery || '').toLowerCase().trim();
+    const subjectName = (session.subjectName || '').toLowerCase();
+    const teacherName = (session.teacherName || '').toLowerCase();
+    const topic = (session.topic || '').toLowerCase();
+    const className = (session.className || '').toLowerCase();
+
     const matchesSearch =
-      session.subjectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      session.teacherName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      session.topic.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      session.className.toLowerCase().includes(searchQuery.toLowerCase());
+      !q ||
+      subjectName.includes(q) ||
+      teacherName.includes(q) ||
+      topic.includes(q) ||
+      className.includes(q);
 
     const matchesClass = selectedClassFilter === 'ALL' || session.className === selectedClassFilter;
     const matchesTeacher = selectedTeacherFilter === 'ALL' || session.teacherName === selectedTeacherFilter;

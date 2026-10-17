@@ -342,8 +342,8 @@ export const MonitoringMatrix: React.FC<MonitoringMatrixProps> = ({
       const sess = matrixMap[cls]?.[slot.id];
       if (!sess) return false;
       return (
-        sess.teacherName.toLowerCase().includes(term) ||
-        sess.subjectName.toLowerCase().includes(term)
+        (sess.teacherName || '').toLowerCase().includes(term) ||
+        (sess.subjectName || '').toLowerCase().includes(term)
       );
     });
   });

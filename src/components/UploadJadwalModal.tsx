@@ -219,9 +219,9 @@ export const UploadJadwalModal: React.FC<UploadJadwalModalProps> = ({
       if (searchPreview) {
         const q = searchPreview.toLowerCase();
         return (
-          s.className.toLowerCase().includes(q) ||
-          s.subjectName.toLowerCase().includes(q) ||
-          s.teacherName.toLowerCase().includes(q)
+          (s.className || '').toLowerCase().includes(q) ||
+          (s.subjectName || '').toLowerCase().includes(q) ||
+          (s.teacherName || '').toLowerCase().includes(q)
         );
       }
       return true;
