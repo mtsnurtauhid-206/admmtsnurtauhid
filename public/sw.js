@@ -2,9 +2,9 @@
 const CACHE_NAME = 'madrasah-portal-v2';
 
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json'
+  './',
+  './index.html',
+  './manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
@@ -63,9 +63,9 @@ self.addEventListener('fetch', (event) => {
         .catch(async () => {
           const cachedResponse = await caches.match(request);
           if (cachedResponse) return cachedResponse;
-          const rootCached = await caches.match('/');
+          const rootCached = await caches.match('./') || await caches.match('/');
           if (rootCached) return rootCached;
-          return caches.match('/index.html');
+          return (await caches.match('./index.html')) || (await caches.match('/index.html')) || (await caches.match('index.html'));
         })
     );
     return;

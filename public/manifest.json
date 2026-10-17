@@ -2,7 +2,7 @@
   "name": "Portal Administrasi Guru Madrasah",
   "short_name": "Guru Madrasah",
   "description": "Aplikasi Administrasi Guru, Presensi Digital, dan Siaran Pengumuman Madrasah",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#1e1b4b",
