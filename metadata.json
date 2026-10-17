@@ -1,0 +1,8 @@
+{
+  "name": "Administrasi Guru MTs Nur Tauhid",
+  "description": "Aplikasi Administrasi Madrasah",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
